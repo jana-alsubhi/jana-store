@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>فعالية المتجر</title>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <style>
+      /* خلفية الصفحة */
+      body {
+        background-color: #f8f9fa;
+      }
+      /* القائمة */
+      .navbar {
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        transition: background-color 0.5s ease;
+      }
+      .navbar-collapse {
+        transition: all 0.5s ease-in-out;
+      }
+      /* إعدادات الشعار والأزرار */
+      .store-logo {
+        max-width: 200px;
+        transition: transform 0.3s ease-in-out;
+      }
+      .store-logo:hover {
+        transform: scale(1.05);
+      }
+      .btn-animate {
+        transition: transform 0.3s ease;
+      }
+      .btn-animate:hover {
+        transform: scale(1.05);
+      }
+      .wide-image {
+        width: 50%;
+        height: auto;
+      }
+      /* تحسين الاستجابة */
+      @media (max-width: 576px) {
+        .store-logo {
+          max-width: 150px;
+        }
+        .navbar-brand {
+          font-size: 1.2rem;
+        }
+        .wide-image {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- قائمة تنفل -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Jana Store</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="القائمة"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#event">تفاصيل الفعالية</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#bookings">الحجوزات</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">تواصل معنا</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-5">
+      <!-- الشعار -->
+      <header class="text-center mb-4">
+        <img src="store-logo.png" alt="شعار المتجر" class="store-logo" />
+      </header>
+
+      <!-- تفاصيل الفعالية -->
+      <section id="event" class="text-center mb-4">
+        <h1>السلام عليكم</h1>
+        <p class="lead">
+          يشرفنا حضوركم في فعالية اسبوع الرفاهية، يبدأ من الساعة ٤م إلى ١٠م
+        </p>
+        <a
+          href="https://youtu.be/zpDza9rd9_4?si=QJBArsdmp-HkT_20"
+          class="btn btn-primary btn-animate"
+        >
+          أضغط هنا
+        </a>
+      </section>
+
+      <!-- صورة الفعالية -->
+      <section class="text-center">
+        <img
+          src="event-description.png"
+          alt="وصف الفعالية"
+          class="wide-image"
+        />
+      </section>
+
+      <!-- قسم الحجوزات -->
+      <section id="bookings" class="mt-5">
+        <h2 class="text-center">الحجوزات</h2>
+        <p class="text-center">
+          سيتم تحديث الحجوزات قريبًا، تابعونا للمزيد من التفاصيل!
+        </p>
+      </section>
+    </div>
+
+    <!-- نهاية الصفحة -->
+    <footer class="bg-light py-3">
+      <div class="container text-center">
+        <p>&copy; 2025 Jana Store. جميع الحقوق محفوظة.</p>
+        <p>s8249891@mkhg.moe.gov.sa</p>
+        <p>جنى زيد مزيد الصبحي</p>
+        <p id="contact">
+          للاستفسارات:
+          <a href="mailto:s8249891@mkhg.moe.gov.sa">s8249891@mkhg.moe.gov.sa</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="bootstrap.js"></script>
+    <script>
+      // إغلاق القائمة عند النقر خارجها
+      document.addEventListener("click", function (event) {
+        const navbarNav = document.getElementById("navbarNav");
+        const insideNavbar = navbarNav.contains(event.target);
+        const onToggle = event.target.closest(".navbar-toggler");
+        if (!insideNavbar && !onToggle && navbarNav.classList.contains("show")) {
+          const collapseInstance = bootstrap.Collapse.getInstance(navbarNav);
+          if (collapseInstance) {
+            collapseInstance.hide();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
