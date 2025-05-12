@@ -51,10 +51,10 @@
     </style>
   </head>
   <body>
-    <!-- قائمة تنفل -->
+    <!-- قائمة التنقل -->
     <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Jana Store</a>
+        <a class="navbar-brand" id="navbarBrand" href="#">Jana Store</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -69,13 +69,19 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#event">تفاصيل الفعالية</a>
+              <a class="nav-link" id="navDetails" href="#event">تفاصيل الفعالية</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#bookings">الحجوزات</a>
+              <a class="nav-link" id="navBookings" href="#bookings">الحجوزات</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact">تواصل معنا</a>
+              <a class="nav-link" id="navContact" href="#footerContact">تواصل معنا</a>
+            </li>
+            <li class="nav-item">
+              <!-- تغير اللغة -->
+              <button id="toggleLang" class="btn btn-outline-secondary">
+                English
+              </button>
             </li>
           </ul>
         </div>
@@ -90,11 +96,12 @@
 
       <!-- تفاصيل الفعالية -->
       <section id="event" class="text-center mb-4">
-        <h1>السلام عليكم</h1>
-        <p class="lead">
+        <h1 id="eventHeading">السلام عليكم</h1>
+        <p id="eventParagraph" class="lead">
           يشرفنا حضوركم في فعالية اسبوع الرفاهية، يبدأ من الساعة ٤م إلى ١٠م
         </p>
         <a
+          id="eventButton"
           href="https://youtu.be/zpDza9rd9_4?si=QJBArsdmp-HkT_20"
           class="btn btn-primary btn-animate"
         >
@@ -113,8 +120,8 @@
 
       <!-- قسم الحجوزات -->
       <section id="bookings" class="mt-5">
-        <h2 class="text-center">الحجوزات</h2>
-        <p class="text-center">
+        <h2 id="bookingsHeading" class="text-center">الحجوزات</h2>
+        <p id="bookingsParagraph" class="text-center">
           سيتم تحديث الحجوزات قريبًا، تابعونا للمزيد من التفاصيل!
         </p>
       </section>
@@ -123,30 +130,110 @@
     <!-- نهاية الصفحة -->
     <footer class="bg-light py-3">
       <div class="container text-center">
-        <p>&copy; 2025 Jana Store. جميع الحقوق محفوظة.</p>
+        <p id="footerRights">© 2025 Jana Store. جميع الحقوق محفوظة.</p>
         <p>s8249891@mkhg.moe.gov.sa</p>
-        <p>جنى زيد مزيد الصبحي</p>
-        <p id="contact">
-          للاستفسارات:
+        <p id="footerName">جنى زيد مزيد الصبحي</p>
+        <p id="footerContact">
+          <span id="footerInquiry">للاستفسارات:</span>
           <a href="mailto:s8249891@mkhg.moe.gov.sa">s8249891@mkhg.moe.gov.sa</a>
         </p>
       </div>
     </footer>
 
     <script src="bootstrap.js"></script>
-    <script>
-      // إغلاق القائمة عند النقر خارجها
-      document.addEventListener("click", function (event) {
-        const navbarNav = document.getElementById("navbarNav");
-        const insideNavbar = navbarNav.contains(event.target);
-        const onToggle = event.target.closest(".navbar-toggler");
-        if (!insideNavbar && !onToggle && navbarNav.classList.contains("show")) {
-          const collapseInstance = bootstrap.Collapse.getInstance(navbarNav);
-          if (collapseInstance) {
-            collapseInstance.hide();
-          }
-        }
-      });
-    </script>
+   <script>
+  // قاموس الترجمة
+  const translations = {
+    navbarBrand: {
+      ar: "Jana Store",
+      en: "Jana Store"
+    },
+    navDetails: {
+      ar: "تفاصيل الفعالية",
+      en: "Event Details"
+    },
+    navBookings: {
+      ar: "الحجوزات",
+      en: "Bookings"
+    },
+    navContact: {
+      ar: "تواصل معنا",
+      en: "Contact Us"
+    },
+    eventHeading: {
+      ar: "السلام عليكم",
+      en: "Welcome"
+    },
+    eventParagraph: {
+      ar: "يشرفنا حضوركم في فعالية اسبوع الرفاهية، يبدأ من الساعة ٤م إلى ١٠م",
+      en: "We are honored to have you at the Wellness Week event, from 4 PM to 10 PM"
+    },
+    eventButton: {
+      ar: "أضغط هنا",
+      en: "Click here"
+    },
+    bookingsHeading: {
+      ar: "الحجوزات",
+      en: "Bookings"
+    },
+    bookingsParagraph: {
+      ar: "سيتم تحديث الحجوزات قريبًا، تابعونا للمزيد من التفاصيل!",
+      en: "Bookings will be updated soon, stay tuned for more details!"
+    },
+    footerRights: {
+      ar: "© 2025 Jana Store. جميع الحقوق محفوظة.",
+      en: "© 2025 Jana Store. All rights reserved."
+    },
+    footerInquiry: {
+      ar: "للاستفسارات:",
+      en: "For inquiries:"
+    },
+    footerName: {
+      ar: "جنى زيد مزيد الصبحي",
+      en: "Jana Zaid mazyad AlSubhi"
+    }
+  };
+
+  let currentLanguage = "ar";
+
+  // لتبديل اللغة والاتجاه
+  function toggleLanguage() {
+    currentLanguage = currentLanguage === "ar" ? "en" : "ar";
+
+ 
+    document.documentElement.lang = currentLanguage;
+    document.documentElement.dir = currentLanguage === "ar" ? "rtl" : "ltr";
+
+    // تحديث محتوى النص لكل عنصر
+    document.getElementById("navbarBrand").textContent = translations.navbarBrand[currentLanguage];
+    document.getElementById("navDetails").textContent = translations.navDetails[currentLanguage];
+    document.getElementById("navBookings").textContent = translations.navBookings[currentLanguage];
+    document.getElementById("navContact").textContent = translations.navContact[currentLanguage];
+    document.getElementById("eventHeading").textContent = translations.eventHeading[currentLanguage];
+    document.getElementById("eventParagraph").textContent = translations.eventParagraph[currentLanguage];
+    document.getElementById("eventButton").textContent = translations.eventButton[currentLanguage];
+    document.getElementById("bookingsHeading").textContent = translations.bookingsHeading[currentLanguage];
+    document.getElementById("bookingsParagraph").textContent = translations.bookingsParagraph[currentLanguage];
+    document.getElementById("footerRights").textContent = translations.footerRights[currentLanguage];
+    document.getElementById("footerInquiry").textContent = translations.footerInquiry[currentLanguage];
+    document.getElementById("footerName").textContent = translations.footerName[currentLanguage];
+    document.getElementById("toggleLang").textContent = currentLanguage === "ar" ? "English" : "عربي";
+  }
+
+  document.getElementById("toggleLang").addEventListener("click", toggleLanguage);
+
+
+  document.addEventListener("click", function (event) {
+    const navbarNav = document.getElementById("navbarNav");
+    const insideNavbar = navbarNav.contains(event.target);
+    const onToggle = event.target.closest(".navbar-toggler");
+    if (!insideNavbar && !onToggle && navbarNav.classList.contains("show")) {
+      const collapseInstance = bootstrap.Collapse.getInstance(navbarNav);
+      if (collapseInstance) {
+        collapseInstance.hide();
+      }
+    }
+  });
+</script>
   </body>
 </html>
